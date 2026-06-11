@@ -33,6 +33,9 @@ gave up with no answer at all** (the agent kept re-scanning metadata trying to
 find the right table among 278). With Neocarta, every question was a correct,
 two-step answer (retrieve → query).
 
+<img width="811" height="857" alt="image" src="https://github.com/user-attachments/assets/5c587c08-1ee6-4904-ac5a-d7674568a54c" />
+
+
 ### The talking point
 
 > "With a cheap model and no semantic layer, half the questions **failed** — and
