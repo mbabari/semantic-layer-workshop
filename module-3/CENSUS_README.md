@@ -108,8 +108,7 @@ MODELS=gpt-4o-mini,gpt-4o uv run module-3/benchmark_census.py
 | **Column embeddings** | `build_census_semantic_layer.py` → `EMBEDDING_NODE_LABELS` | 68K columns — slow; enables column-hybrid retrieval |
 | **Business terms** | Module 2b pattern (CSV glossary) | Maps “rent burden” → column names |
 
-**Product feedback:** ideal long-term fix is a `verbosity=compact` option on Neocarta MCP
-`TableContext` responses rather than agent-side wrappers.
+
 
 ---
 
@@ -122,8 +121,6 @@ MODELS=gpt-4o-mini,gpt-4o uv run module-3/benchmark_census.py
 | 3 | States by median age, 2015 5-year | `state_2015_5yr` |
 | 4 | Top 10 counties by median household income, 2018 5-year | `county_2018_5yr` |
 
-Avoid live questions about overlapping “area” geographies (CBSA vs PUMA vs place) —
-table-level vector search struggles to separate them.
 
 ---
 
@@ -141,8 +138,4 @@ Workshop originals (`3_agent.py`, Module 2 notebooks) are unchanged.
 
 ---
 
-## Security reminder
 
-- **Never commit** `.env`, API keys, or internal Slack/meeting notes.
-- `.env` is gitignored; use `.env.example` as the template only.
-- This demo reads **public** Census data; you only pay BigQuery for bytes scanned.
