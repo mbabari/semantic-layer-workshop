@@ -37,7 +37,52 @@ two-step answer (retrieve → query).
 
 <img width="811" height="857" alt="image" src="https://github.com/user-attachments/assets/5c587c08-1ee6-4904-ac5a-d7674568a54c" />
 
+### Reading the results
 
+The table above is produced by `census_agent_optimized.py --runall` — a sweep of
+5 models × 4 questions × {WITHOUT, WITH} Neocarta (compact retrieval). Here is
+what the numbers show.
+
+**Per-question results (top section)**
+
+- **WITHOUT** rows: the agent brute-forces schema discovery via BigQuery
+  `INFORMATION_SCHEMA`. Look at `gpt-4o-mini` Q1 and Q4 — **66K+ tokens, 20 tool
+  calls, OK=N**: the agent looped through table lists and column inspections,
+  burned tokens, and still returned no answer.
+- **WITH** rows: the agent calls `get_table_schema_compact` (one Neocarta
+  retrieval, compacted to ~2K tokens of `name + type` per column), then
+  `execute_sql`. Every row shows **2 calls, OK=Y**, and the correct table.
+- The **COST** column shows per-question spend. On `gpt-4o-mini`, a failed
+  WITHOUT run costs ~$0.01 for nothing; a successful WITH run costs ~$0.001.
+
+**Summary (bottom section) — how the optimized version saves cost**
+
+| Model | WITHOUT avg | WITH (compact) avg | Saving | Key insight |
+|-------|-------------|-------------------|--------|-------------|
+| gpt-4o-mini | 40,563 tok | 7,628 tok | **81%** | Failed 2/4 without → 4/4 with. Biggest win: you stop paying for failed runs. |
+| gpt-4o | 15,414 tok | 6,802 tok | **56%** | Strong model brute-forces OK (4/4 both), but compact retrieval still halves the cost. |
+| claude-haiku-4-5 | 24,785 tok | 10,677 tok | **57%** | Cheap Anthropic model — same pattern as gpt-4o-mini but doesn't loop to failure. |
+| claude-sonnet-4-5 | 38,177 tok | 12,860 tok | **66%** | Mid-tier model. WITHOUT is expensive (~$0.13/q); WITH brings it to ~$0.05/q. |
+| claude-opus-4-5 | 34,095 tok | 18,796 tok | **45%** | Most capable model. Still saves ~$0.08/q — compound that over thousands of queries. |
+
+**Where do the savings come from?**
+
+1. **Compact payload** — Neocarta's raw `TableContext` JSON serializes every
+   column with null/empty fields (`nullable`, `examples`, `key_type`, …). The
+   compact wrapper strips these, keeping only `column_name` + `data_type`. A
+   single table drops from ~10–20K tokens to ~2K.
+2. **Re-send multiplier** — LangGraph replays the full conversation (including
+   tool results) as model input on every subsequent call. A 2K result re-sent
+   across 2–3 calls costs far less than a 20K result re-sent the same way.
+3. **No wasted loops** — WITHOUT `gpt-4o-mini` burns ~66K tokens on runs that
+   produce no answer. WITH Neocarta, every question answers in 2 calls.
+   **You stop paying for failure.**
+
+**Reproduce it:**
+
+```bash
+uv run module-3/census_agent_optimized.py --runall
+```
 
 ## Why a naive agent struggles (the "confusion" to show on screen)
 
