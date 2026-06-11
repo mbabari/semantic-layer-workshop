@@ -33,18 +33,11 @@ gave up with no answer at all** (the agent kept re-scanning metadata trying to
 find the right table among 278). With Neocarta, every question was a correct,
 two-step answer (retrieve → query).
 
+
+
 <img width="811" height="857" alt="image" src="https://github.com/user-attachments/assets/5c587c08-1ee6-4904-ac5a-d7674568a54c" />
 
 
-### The talking point
-
-> "With a cheap model and no semantic layer, half the questions **failed** — and
-> you still paid ~66K tokens for those dead-end runs that returned nothing. With
-> Neocarta, the same cheap model answers every question correctly in two steps.
-> You stop paying for failure, and you can use a cheaper model with confidence."
-
-The value is **reliability and accuracy for cheaper models** — and eliminating
-**wasted spend on runs that produce no answer** — not a flat "X% fewer tokens."
 
 ## Why a naive agent struggles (the "confusion" to show on screen)
 
