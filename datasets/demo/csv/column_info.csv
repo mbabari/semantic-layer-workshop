@@ -1,0 +1,328 @@
+database_name,schema_name,table_name,column_name,description,data_type,is_primary_key,is_foreign_key,is_nullable
+ecommerce_db,acme_corp,campaigns,budget_usd,Planned budget in USD.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,campaigns,campaign_id,Unique campaign identifier (format: CAMP###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,campaigns,channel,"Channel: email, social, paid_search, event, content, ads.",STRING,False,False,True
+ecommerce_db,acme_corp,campaigns,end_date,Campaign end date.,DATE,False,False,True
+ecommerce_db,acme_corp,campaigns,name,Campaign display name.,STRING,False,False,True
+ecommerce_db,acme_corp,campaigns,owner_employee_id,FK to employees.employee_id of the campaign owner.,STRING,False,False,True
+ecommerce_db,acme_corp,campaigns,spend_usd,Actual spend to date in USD.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,campaigns,start_date,Campaign start date.,DATE,False,False,True
+ecommerce_db,acme_corp,compensation,approved_by,FK to employees.employee_id of the approver.,STRING,False,False,True
+ecommerce_db,acme_corp,compensation,base_salary,Annualized base salary in the specified currency.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,compensation,bonus_target_pct,Target bonus as a percentage of base salary.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,compensation,change_type,"Reason for the change: new_hire, merit, promotion, adjustment.",STRING,False,False,True
+ecommerce_db,acme_corp,compensation,compensation_id,Unique comp record (format: COMP###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,compensation,currency,ISO 4217 currency code.,STRING,False,False,True
+ecommerce_db,acme_corp,compensation,effective_date,Date the comp change takes effect. Table is partitioned on this column.,DATE,False,False,False
+ecommerce_db,acme_corp,compensation,employee_id,FK to employees.employee_id.,STRING,False,True,False
+ecommerce_db,acme_corp,compensation,equity_grant_usd,Equity grant value in USD at grant time. 0 for cash-only roles.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,customer_addresses,address_id,Unique address identifier (format: ADDR###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,customer_addresses,address_type,"Address type: billing, shipping, hq.",STRING,False,False,True
+ecommerce_db,acme_corp,customer_addresses,city,City.,STRING,False,False,True
+ecommerce_db,acme_corp,customer_addresses,country,ISO 3166-1 alpha-2 country code.,STRING,False,False,True
+ecommerce_db,acme_corp,customer_addresses,customer_id,FK to customers.customer_id.,STRING,False,True,False
+ecommerce_db,acme_corp,customer_addresses,is_primary,TRUE for the primary address of this type.,BOOL,False,False,True
+ecommerce_db,acme_corp,customer_addresses,line1,Street address line 1.,STRING,False,False,True
+ecommerce_db,acme_corp,customer_addresses,line2,"Street address line 2 (suite, floor). May be NULL.",STRING,False,False,True
+ecommerce_db,acme_corp,customer_addresses,postal_code,Postal or ZIP code.,STRING,False,False,True
+ecommerce_db,acme_corp,customer_addresses,region,State / province / region.,STRING,False,False,True
+ecommerce_db,acme_corp,customer_contacts,contact_id,Unique contact identifier (format: CONTACT###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,customer_contacts,created_at,Row insert timestamp.,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,customer_contacts,customer_id,FK to customers.customer_id.,STRING,False,True,False
+ecommerce_db,acme_corp,customer_contacts,email,Contact work email.,STRING,False,False,True
+ecommerce_db,acme_corp,customer_contacts,first_name,Contact first name.,STRING,False,False,True
+ecommerce_db,acme_corp,customer_contacts,is_decision_maker,TRUE if the contact has buying authority.,BOOL,False,False,True
+ecommerce_db,acme_corp,customer_contacts,is_primary,TRUE for the primary account contact. At most one per customer.,BOOL,False,False,True
+ecommerce_db,acme_corp,customer_contacts,last_name,Contact last name.,STRING,False,False,True
+ecommerce_db,acme_corp,customer_contacts,phone,Contact phone in E.164 format.,STRING,False,False,True
+ecommerce_db,acme_corp,customer_contacts,title,Contact job title at the customer.,STRING,False,False,True
+ecommerce_db,acme_corp,customers,account_owner_id,FK to employees.employee_id. Current account owner (AE or CSM).,STRING,False,True,True
+ecommerce_db,acme_corp,customers,acquired_date,Date the customer signed the first contract.,DATE,False,False,True
+ecommerce_db,acme_corp,customers,annual_revenue_usd,"Estimated customer annual revenue in USD, from enrichment data.",NUMERIC,False,False,True
+ecommerce_db,acme_corp,customers,company_name,Legal company name.,STRING,False,False,False
+ecommerce_db,acme_corp,customers,country,ISO 3166-1 alpha-2 headquarters country.,STRING,False,False,True
+ecommerce_db,acme_corp,customers,created_at,Row insert timestamp.,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,customers,customer_id,Unique customer account identifier (format: CUST###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,customers,employee_count,Estimated customer employee count.,INT64,False,False,True
+ecommerce_db,acme_corp,customers,health_score,Account health score 0-100. Computed by Customer Success model.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,customers,industry,"Industry vertical (e.g. financial_services, retail, healthcare).",STRING,False,False,True
+ecommerce_db,acme_corp,customers,lifetime_value_usd,"Cumulative revenue from this customer to date, in USD.",NUMERIC,False,False,True
+ecommerce_db,acme_corp,customers,segment,"Sales segment: enterprise, mid_market, smb.",STRING,False,False,True
+ecommerce_db,acme_corp,customers,status,"Account status: active, churned, prospect.",STRING,False,False,True
+ecommerce_db,acme_corp,customers,tags,"ARRAY of free-form tags (e.g. strategic, at_risk, case_study).",ARRAY<STRING>,False,False,False
+ecommerce_db,acme_corp,customers,website,Customer primary website domain.,STRING,False,False,True
+ecommerce_db,acme_corp,departments,budget_annual_usd,Approved annual operating budget in USD.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,departments,cost_center,Finance cost center code used in GL postings.,STRING,False,False,True
+ecommerce_db,acme_corp,departments,created_at,Row insert timestamp.,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,departments,department_id,Unique department identifier (format: DEPT###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,departments,head_employee_id,Logical FK to employees.employee_id. The department head / senior leader.,STRING,False,True,True
+ecommerce_db,acme_corp,departments,name,"Department display name (e.g. Engineering, Customer Success).",STRING,False,False,False
+ecommerce_db,acme_corp,departments,parent_department_id,Logical self-reference to departments.department_id. NULL for top-level departments.,STRING,False,False,True
+ecommerce_db,acme_corp,employee_role_history,change_reason,"Why the change happened: new_hire, promotion, lateral, reorg, termination.",STRING,False,False,True
+ecommerce_db,acme_corp,employee_role_history,department_id,FK to departments.department_id during this period.,STRING,False,True,True
+ecommerce_db,acme_corp,employee_role_history,employee_id,FK to employees.employee_id.,STRING,False,True,False
+ecommerce_db,acme_corp,employee_role_history,end_date,Last day in this role. NULL for the current role.,DATE,False,False,True
+ecommerce_db,acme_corp,employee_role_history,job_title_id,FK to job_titles.job_title_id. Title held during this period.,STRING,False,True,False
+ecommerce_db,acme_corp,employee_role_history,manager_id,FK to employees.employee_id. Manager during this period.,STRING,False,True,True
+ecommerce_db,acme_corp,employee_role_history,role_history_id,Unique role history record (format: RH###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,employee_role_history,start_date,First day in this role.,DATE,False,False,False
+ecommerce_db,acme_corp,employee_role_history,team_id,FK to teams.team_id during this period.,STRING,False,True,True
+ecommerce_db,acme_corp,employee_training,completed_at,When the employee completed the course. NULL if in progress or abandoned.,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,employee_training,completion_status,"Status: completed, in_progress, abandoned.",STRING,False,False,True
+ecommerce_db,acme_corp,employee_training,course_id,FK to training_courses.course_id.,STRING,False,True,False
+ecommerce_db,acme_corp,employee_training,employee_id,FK to employees.employee_id.,STRING,False,True,False
+ecommerce_db,acme_corp,employee_training,enrolled_at,When the employee enrolled.,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,employee_training,enrollment_id,Unique enrollment identifier (format: ENR###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,employee_training,score,Final score (0-100). NULL if no assessment or not completed.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,employees,country,ISO 3166-1 alpha-2 country of residence for tax purposes.,STRING,False,False,True
+ecommerce_db,acme_corp,employees,created_at,Row insert timestamp.,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,employees,date_of_birth,Date of birth. Sensitive PII — access-controlled.,DATE,False,False,True
+ecommerce_db,acme_corp,employees,department_id,FK to departments.department_id.,STRING,False,True,True
+ecommerce_db,acme_corp,employees,email,Corporate email address. Unique per active employee.,STRING,False,False,False
+ecommerce_db,acme_corp,employees,emergency_contact,"STRUCT with name, relation, phone for emergency contact. Sensitive PII.","STRUCT<name STRING, relation STRING, phone STRING>",False,False,True
+ecommerce_db,acme_corp,employees,employee_id,Unique employee identifier (format: EMP###). Primary key. Stable across role changes.,STRING,True,False,False
+ecommerce_db,acme_corp,employees,employment_status,"Current status: active, terminated, on_leave.",STRING,False,False,True
+ecommerce_db,acme_corp,employees,employment_type,"Employment category: full_time, part_time, contractor.",STRING,False,False,True
+ecommerce_db,acme_corp,employees,first_name,Employee legal first name.,STRING,False,False,False
+ecommerce_db,acme_corp,employees,gender,Self-reported gender. Sensitive PII.,STRING,False,False,True
+ecommerce_db,acme_corp,employees,hire_date,Date the employee started at ACME.,DATE,False,False,False
+ecommerce_db,acme_corp,employees,job_title_id,FK to job_titles.job_title_id. Current title.,STRING,False,True,True
+ecommerce_db,acme_corp,employees,last_name,Employee legal last name.,STRING,False,False,False
+ecommerce_db,acme_corp,employees,manager_id,Logical self-reference to employees.employee_id. Direct manager; NULL for C-level.,STRING,False,False,True
+ecommerce_db,acme_corp,employees,office_id,FK to offices.office_id. Primary assigned office (remote employees keep a nominal office).,STRING,False,True,True
+ecommerce_db,acme_corp,employees,phone,Work phone number in E.164 format.,STRING,False,False,True
+ecommerce_db,acme_corp,employees,skills,"ARRAY of skill tags, self-reported or inferred from HR tools.",ARRAY<STRING>,False,False,False
+ecommerce_db,acme_corp,employees,team_id,FK to teams.team_id. Optional (not every employee belongs to a team).,STRING,False,True,True
+ecommerce_db,acme_corp,employees,termination_date,Last working day. NULL for active employees.,DATE,False,False,True
+ecommerce_db,acme_corp,employees,updated_at,Last update timestamp. Bumped on any row change.,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,invoices,amount_usd,"Pre-tax amount, USD.",NUMERIC,False,False,True
+ecommerce_db,acme_corp,invoices,customer_id,FK to customers.customer_id.,STRING,False,True,False
+ecommerce_db,acme_corp,invoices,due_date,Payment due date (typically net 30).,DATE,False,False,True
+ecommerce_db,acme_corp,invoices,invoice_id,Unique invoice identifier (format: INV###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,invoices,invoice_number,Human-readable invoice number (e.g. INV-2025-00001). Printed on the invoice.,STRING,False,False,True
+ecommerce_db,acme_corp,invoices,issue_date,Date the invoice was issued. Partition key.,DATE,False,False,True
+ecommerce_db,acme_corp,invoices,order_id,FK to orders.order_id. NULL for pure-subscription invoices.,STRING,False,True,True
+ecommerce_db,acme_corp,invoices,paid_at,When the invoice was marked paid. NULL for unpaid invoices.,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,invoices,status,"Invoice status: draft, sent, paid, overdue, void.",STRING,False,False,True
+ecommerce_db,acme_corp,invoices,subscription_id,FK to subscriptions.subscription_id. NULL for one-time order invoices.,STRING,False,True,True
+ecommerce_db,acme_corp,invoices,tax_usd,"Tax amount, USD.",NUMERIC,False,False,True
+ecommerce_db,acme_corp,invoices,total_usd,Total invoice amount in USD.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,job_titles,currency,ISO 4217 currency code for the salary band.,STRING,False,False,True
+ecommerce_db,acme_corp,job_titles,job_family,"Job family grouping: engineering, sales, product, customer_success, g_and_a.",STRING,False,False,True
+ecommerce_db,acme_corp,job_titles,job_title_id,Unique job title identifier (format: JT###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,job_titles,level,"Career level code. IC1..IC8 for individual contributors, M1..M5 for managers.",STRING,False,False,True
+ecommerce_db,acme_corp,job_titles,max_salary,Top of the salary band in the specified currency.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,job_titles,min_salary,Bottom of the salary band in the specified currency.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,job_titles,title,Human-readable title (e.g. Senior Software Engineer).,STRING,False,False,False
+ecommerce_db,acme_corp,leads,assigned_to,FK to employees.employee_id of the assigned SDR/AE.,STRING,False,True,True
+ecommerce_db,acme_corp,leads,campaign_id,FK to campaigns.campaign_id. NULL for unattributed leads.,STRING,False,True,True
+ecommerce_db,acme_corp,leads,company,Free-text company name as provided by the lead.,STRING,False,False,True
+ecommerce_db,acme_corp,leads,converted_at,When the lead was converted.,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,leads,converted_customer_id,FK to customers.customer_id if the lead converted. NULL otherwise.,STRING,False,True,True
+ecommerce_db,acme_corp,leads,created_at,When the lead was first captured. Partition key (by DATE).,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,leads,email,Lead email address.,STRING,False,False,True
+ecommerce_db,acme_corp,leads,first_name,Lead first name.,STRING,False,False,True
+ecommerce_db,acme_corp,leads,last_name,Lead last name.,STRING,False,False,True
+ecommerce_db,acme_corp,leads,lead_id,Unique lead identifier (format: LEAD###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,leads,score,Lead score 0-100 from the marketing automation platform.,INT64,False,False,True
+ecommerce_db,acme_corp,leads,source,"Lead source: web, event, referral, outbound, ads, social.",STRING,False,False,True
+ecommerce_db,acme_corp,leads,status,"Lead state: new, contacted, qualified, disqualified, converted.",STRING,False,False,True
+ecommerce_db,acme_corp,leads,title,Job title as provided.,STRING,False,False,True
+ecommerce_db,acme_corp,offices,address,Full street address.,STRING,False,False,True
+ecommerce_db,acme_corp,offices,city,City where the office is located.,STRING,False,False,True
+ecommerce_db,acme_corp,offices,country,ISO 3166-1 alpha-2 country code.,STRING,False,False,False
+ecommerce_db,acme_corp,offices,created_at,Row insert timestamp.,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,offices,headcount_capacity,Maximum number of employees the office can seat.,INT64,False,False,True
+ecommerce_db,acme_corp,offices,is_hq,TRUE for the global headquarters. Exactly one office should have this flag set.,BOOL,False,False,True
+ecommerce_db,acme_corp,offices,name,"Display name of the office, typically city-based (e.g. San Francisco HQ).",STRING,False,False,False
+ecommerce_db,acme_corp,offices,office_id,Unique office identifier (format: OFF###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,offices,opened_date,Date the office officially opened.,DATE,False,False,True
+ecommerce_db,acme_corp,offices,timezone,IANA timezone identifier (e.g. America/Los_Angeles).,STRING,False,False,True
+ecommerce_db,acme_corp,opportunities,amount_usd,Expected deal size in USD.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,opportunities,close_date,Expected or actual close date. Partition key.,DATE,False,False,True
+ecommerce_db,acme_corp,opportunities,closed_at,When the opportunity was closed (won or lost).,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,opportunities,created_at,When the opportunity was created.,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,opportunities,customer_id,FK to customers.customer_id.,STRING,False,True,True
+ecommerce_db,acme_corp,opportunities,loss_reason,Free-text loss reason. Populated only for closed_lost.,STRING,False,False,True
+ecommerce_db,acme_corp,opportunities,name,Opportunity display name.,STRING,False,False,True
+ecommerce_db,acme_corp,opportunities,opportunity_id,Unique opportunity identifier (format: OPP###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,opportunities,owner_employee_id,FK to employees.employee_id. Deal owner (AE).,STRING,False,True,True
+ecommerce_db,acme_corp,opportunities,probability,Win probability 0.0-1.0. Drives weighted pipeline.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,opportunities,source_lead_id,FK to leads.lead_id if this opp originated from a tracked lead.,STRING,False,True,True
+ecommerce_db,acme_corp,opportunities,stage,"Pipeline stage: discovery, proposal, negotiation, closed_won, closed_lost.",STRING,False,False,True
+ecommerce_db,acme_corp,order_items,discount_pct,Discount percentage applied to this line.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,order_items,line_total_usd,"Post-discount line total, USD.",NUMERIC,False,False,True
+ecommerce_db,acme_corp,order_items,order_id,FK to orders.order_id.,STRING,False,True,False
+ecommerce_db,acme_corp,order_items,order_item_id,Unique line item identifier (format: OI###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,order_items,product_id,FK to products.product_id.,STRING,False,True,False
+ecommerce_db,acme_corp,order_items,quantity,Units ordered.,INT64,False,False,True
+ecommerce_db,acme_corp,order_items,unit_price_usd,Pre-discount unit price in USD at time of order.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,orders,currency,ISO 4217 currency code. Amounts are stored in USD equivalents.,STRING,False,False,True
+ecommerce_db,acme_corp,orders,customer_id,FK to customers.customer_id.,STRING,False,True,False
+ecommerce_db,acme_corp,orders,order_date,Date the order was placed. Partition key.,DATE,False,False,True
+ecommerce_db,acme_corp,orders,order_id,Unique order identifier (format: ORD###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,orders,placed_by_contact_id,FK to customer_contacts.contact_id. The customer-side purchaser.,STRING,False,True,True
+ecommerce_db,acme_corp,orders,sales_rep_id,FK to employees.employee_id. The ACME sales rep.,STRING,False,True,True
+ecommerce_db,acme_corp,orders,shipping_usd,"Shipping fee, USD. 0 for digital-only orders.",NUMERIC,False,False,True
+ecommerce_db,acme_corp,orders,status,"Status: pending, shipped, delivered, cancelled, returned.",STRING,False,False,True
+ecommerce_db,acme_corp,orders,subtotal_usd,"Sum of line items before tax and shipping, USD.",NUMERIC,False,False,True
+ecommerce_db,acme_corp,orders,tax_usd,"Total tax, USD.",NUMERIC,False,False,True
+ecommerce_db,acme_corp,orders,total_usd,Grand total in USD (subtotal + tax + shipping).,NUMERIC,False,False,True
+ecommerce_db,acme_corp,payments,amount_usd,"Payment amount, USD. Negative or status=refunded for refunds.",NUMERIC,False,False,True
+ecommerce_db,acme_corp,payments,currency,ISO 4217 currency code.,STRING,False,False,True
+ecommerce_db,acme_corp,payments,customer_id,FK to customers.customer_id. Denormalized for query performance.,STRING,False,True,False
+ecommerce_db,acme_corp,payments,invoice_id,FK to invoices.invoice_id.,STRING,False,True,False
+ecommerce_db,acme_corp,payments,paid_at,Timestamp the payment cleared. Partition key (by DATE).,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,payments,payment_id,Unique payment identifier (format: PAY###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,payments,payment_method,"Method: card, ach, wire, check.",STRING,False,False,True
+ecommerce_db,acme_corp,payments,processor,"Processor name: stripe, adyen, bank (for wires/ACH).",STRING,False,False,True
+ecommerce_db,acme_corp,payments,processor_transaction_id,Processor-side transaction ID for reconciliation.,STRING,False,False,True
+ecommerce_db,acme_corp,payments,status,"Status: succeeded, failed, refunded, pending.",STRING,False,False,True
+ecommerce_db,acme_corp,performance_reviews,areas_for_improvement,Free-text development areas.,STRING,False,False,True
+ecommerce_db,acme_corp,performance_reviews,employee_id,FK to employees.employee_id. The reviewee.,STRING,False,True,False
+ecommerce_db,acme_corp,performance_reviews,numeric_score,Numeric score on a 1.0-5.0 scale.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,performance_reviews,overall_rating,"Categorical rating: exceeds, meets, below.",STRING,False,False,True
+ecommerce_db,acme_corp,performance_reviews,review_id,Unique review identifier (format: REV###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,performance_reviews,review_period,"Review period label, e.g. 2025-H1.",STRING,False,False,True
+ecommerce_db,acme_corp,performance_reviews,reviewer_id,FK to employees.employee_id. The reviewer (typically the manager).,STRING,False,True,False
+ecommerce_db,acme_corp,performance_reviews,strengths,Free-text strengths noted by the reviewer.,STRING,False,False,True
+ecommerce_db,acme_corp,performance_reviews,submitted_at,When the review was finalized and submitted.,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,product_categories,category_id,Unique category identifier (format: CAT###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,product_categories,description,Free-text category description.,STRING,False,False,True
+ecommerce_db,acme_corp,product_categories,name,Category display name.,STRING,False,False,False
+ecommerce_db,acme_corp,product_categories,parent_category_id,Logical self-reference to product_categories.category_id. NULL for top-level categories.,STRING,False,False,True
+ecommerce_db,acme_corp,products,category_id,FK to product_categories.category_id.,STRING,False,True,True
+ecommerce_db,acme_corp,products,cost_usd,Internal unit cost in USD. Used for gross margin.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,products,description,Product description for marketing and sales collateral.,STRING,False,False,True
+ecommerce_db,acme_corp,products,is_active,FALSE if the product is retired / not sellable.,BOOL,False,False,True
+ecommerce_db,acme_corp,products,launched_at,Date the product went GA.,DATE,False,False,True
+ecommerce_db,acme_corp,products,list_price_usd,Standard list price in USD (pre-discount).,NUMERIC,False,False,True
+ecommerce_db,acme_corp,products,name,Product display name.,STRING,False,False,False
+ecommerce_db,acme_corp,products,product_id,Unique product identifier (format: PROD###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,products,sku,SKU code used in billing systems.,STRING,False,False,True
+ecommerce_db,acme_corp,products,tags,"ARRAY of product tags used for grouping (e.g. saas, on_prem, genai).",ARRAY<STRING>,False,False,False
+ecommerce_db,acme_corp,project_assignments,allocation_pct,Percentage of time allocated (0-100).,NUMERIC,False,False,True
+ecommerce_db,acme_corp,project_assignments,assignment_id,Unique assignment identifier (format: PA###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,project_assignments,employee_id,FK to employees.employee_id.,STRING,False,True,False
+ecommerce_db,acme_corp,project_assignments,end_date,Assignment end date. NULL for ongoing.,DATE,False,False,True
+ecommerce_db,acme_corp,project_assignments,project_id,FK to projects.project_id.,STRING,False,True,False
+ecommerce_db,acme_corp,project_assignments,role,"Role on this project (e.g. Tech Lead, Designer, Exec Sponsor).",STRING,False,False,True
+ecommerce_db,acme_corp,project_assignments,start_date,Assignment start date.,DATE,False,False,True
+ecommerce_db,acme_corp,projects,actual_end_date,Actual completion date. NULL while in flight.,DATE,False,False,True
+ecommerce_db,acme_corp,projects,budget_usd,Approved budget in USD.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,projects,department_id,FK to departments.department_id of the owning department.,STRING,False,True,True
+ecommerce_db,acme_corp,projects,description,Free-text project description / charter summary.,STRING,False,False,True
+ecommerce_db,acme_corp,projects,name,Project display name.,STRING,False,False,True
+ecommerce_db,acme_corp,projects,project_id,Unique project identifier (format: PROJ###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,projects,project_lead_id,FK to employees.employee_id. The DRI.,STRING,False,True,True
+ecommerce_db,acme_corp,projects,spend_usd,Cumulative spend in USD.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,projects,start_date,Planned / actual start date.,DATE,False,False,True
+ecommerce_db,acme_corp,projects,status,"Status: planned, active, on_hold, completed, cancelled.",STRING,False,False,True
+ecommerce_db,acme_corp,projects,target_end_date,Target completion date.,DATE,False,False,True
+ecommerce_db,acme_corp,quotes,created_by,FK to employees.employee_id of the quote author.,STRING,False,True,True
+ecommerce_db,acme_corp,quotes,discount_pct,Discount percentage applied to list.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,quotes,opportunity_id,FK to opportunities.opportunity_id.,STRING,False,True,False
+ecommerce_db,acme_corp,quotes,quote_id,Unique quote identifier (format: Q###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,quotes,sent_at,When the quote was sent to the customer.,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,quotes,status,"Quote status: draft, sent, accepted, rejected, expired.",STRING,False,False,True
+ecommerce_db,acme_corp,quotes,total_amount_usd,"Total quote amount after discount, in USD.",NUMERIC,False,False,True
+ecommerce_db,acme_corp,quotes,valid_until,Quote expiration date.,DATE,False,False,True
+ecommerce_db,acme_corp,quotes,version,Quote version (1-based). Incremented on each revision.,INT64,False,False,True
+ecommerce_db,acme_corp,sales_activities,activity_at,When the activity occurred. Partition key (by DATE).,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,sales_activities,activity_id,Unique activity identifier (format: ACT###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,sales_activities,activity_type,"Type: call, email, meeting, demo.",STRING,False,False,True
+ecommerce_db,acme_corp,sales_activities,contact_id,FK to customer_contacts.contact_id.,STRING,False,True,True
+ecommerce_db,acme_corp,sales_activities,duration_minutes,Activity duration in minutes.,INT64,False,False,True
+ecommerce_db,acme_corp,sales_activities,employee_id,FK to employees.employee_id. The rep logging the activity.,STRING,False,True,True
+ecommerce_db,acme_corp,sales_activities,lead_id,FK to leads.lead_id. NULL for opportunity-stage activities.,STRING,False,True,True
+ecommerce_db,acme_corp,sales_activities,notes,Free-text activity notes.,STRING,False,False,True
+ecommerce_db,acme_corp,sales_activities,opportunity_id,FK to opportunities.opportunity_id. NULL for lead-only activities.,STRING,False,True,True
+ecommerce_db,acme_corp,sales_activities,subject,Short subject / title.,STRING,False,False,True
+ecommerce_db,acme_corp,subscriptions,arr_usd,Annual recurring revenue in USD. Typically mrr_usd * 12.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,subscriptions,billing_cycle,"Billing cadence: monthly, annual.",STRING,False,False,True
+ecommerce_db,acme_corp,subscriptions,cancelled_date,Cancellation date. NULL for active subs.,DATE,False,False,True
+ecommerce_db,acme_corp,subscriptions,customer_id,FK to customers.customer_id.,STRING,False,True,False
+ecommerce_db,acme_corp,subscriptions,mrr_usd,Monthly recurring revenue in USD.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,subscriptions,owner_employee_id,FK to employees.employee_id. Account owner (CSM).,STRING,False,True,True
+ecommerce_db,acme_corp,subscriptions,plan_name,"Plan tier name (e.g. Enterprise Tier 3, Cloud Growth).",STRING,False,False,True
+ecommerce_db,acme_corp,subscriptions,product_id,FK to products.product_id.,STRING,False,True,False
+ecommerce_db,acme_corp,subscriptions,renewal_date,Next renewal date.,DATE,False,False,True
+ecommerce_db,acme_corp,subscriptions,seats,Number of seats / licenses purchased.,INT64,False,False,True
+ecommerce_db,acme_corp,subscriptions,start_date,Subscription start date. Partition key.,DATE,False,False,True
+ecommerce_db,acme_corp,subscriptions,status,"Status: active, cancelled, past_due, trialing.",STRING,False,False,True
+ecommerce_db,acme_corp,subscriptions,subscription_id,Unique subscription identifier (format: SUB###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,support_tickets,assigned_to,FK to employees.employee_id. Assigned support agent.,STRING,False,True,True
+ecommerce_db,acme_corp,support_tickets,category,"Category: billing, technical, feature_request, bug.",STRING,False,False,True
+ecommerce_db,acme_corp,support_tickets,contact_id,FK to customer_contacts.contact_id. The requester.,STRING,False,True,True
+ecommerce_db,acme_corp,support_tickets,created_at,Ticket creation time. Partition key (by DATE).,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,support_tickets,csat_score,Post-resolution CSAT 1-5. NULL if not surveyed or no response.,INT64,False,False,True
+ecommerce_db,acme_corp,support_tickets,customer_id,FK to customers.customer_id. NULL for prospect or anonymous tickets.,STRING,False,True,True
+ecommerce_db,acme_corp,support_tickets,description,Initial problem description.,STRING,False,False,True
+ecommerce_db,acme_corp,support_tickets,first_response_at,First agent response. Drives first-response SLA.,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,support_tickets,priority,"Priority: low, normal, high, urgent.",STRING,False,False,True
+ecommerce_db,acme_corp,support_tickets,resolved_at,When the ticket was moved to solved/closed.,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,support_tickets,status,"Status: new, open, pending, solved, closed.",STRING,False,False,True
+ecommerce_db,acme_corp,support_tickets,subject,Ticket subject line.,STRING,False,False,True
+ecommerce_db,acme_corp,support_tickets,ticket_id,Unique ticket identifier (format: TICK###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,teams,department_id,FK to departments.department_id.,STRING,False,True,False
+ecommerce_db,acme_corp,teams,formed_date,Date the team was formally created.,DATE,False,False,True
+ecommerce_db,acme_corp,teams,is_active,FALSE if the team has been dissolved / reorganized away.,BOOL,False,False,True
+ecommerce_db,acme_corp,teams,lead_employee_id,FK to employees.employee_id. Team lead / manager.,STRING,False,True,True
+ecommerce_db,acme_corp,teams,name,"Team display name (e.g. Platform, Enterprise Sales).",STRING,False,False,False
+ecommerce_db,acme_corp,teams,slack_channel,Primary Slack channel for the team (includes leading #).,STRING,False,False,True
+ecommerce_db,acme_corp,teams,team_id,Unique team identifier (format: TEAM###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,ticket_comments,author_id,FK to customer_contacts.contact_id or employees.employee_id depending on author_type.,STRING,False,False,True
+ecommerce_db,acme_corp,ticket_comments,author_type,"Who authored the comment: customer, agent.",STRING,False,False,True
+ecommerce_db,acme_corp,ticket_comments,body,Comment body text.,STRING,False,False,True
+ecommerce_db,acme_corp,ticket_comments,comment_id,Unique comment identifier (format: TCOM###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,ticket_comments,created_at,Comment timestamp. Partition key (by DATE).,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,ticket_comments,is_internal,TRUE for internal-only notes (not visible to customer).,BOOL,False,False,True
+ecommerce_db,acme_corp,ticket_comments,ticket_id,FK to support_tickets.ticket_id.,STRING,False,True,False
+ecommerce_db,acme_corp,time_off_requests,approver_id,FK to employees.employee_id of the approver.,STRING,False,True,True
+ecommerce_db,acme_corp,time_off_requests,employee_id,FK to employees.employee_id. The requester.,STRING,False,True,False
+ecommerce_db,acme_corp,time_off_requests,end_date,Last day of leave (inclusive).,DATE,False,False,True
+ecommerce_db,acme_corp,time_off_requests,request_id,Unique request identifier (format: TOR###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,time_off_requests,request_type,"Type of leave: vacation, sick, parental, bereavement.",STRING,False,False,True
+ecommerce_db,acme_corp,time_off_requests,requested_at,When the request was submitted.,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,time_off_requests,start_date,First day of leave. Table is partitioned on this column.,DATE,False,False,True
+ecommerce_db,acme_corp,time_off_requests,status,"Request state: pending, approved, denied, cancelled.",STRING,False,False,True
+ecommerce_db,acme_corp,time_off_requests,total_days,Business days requested. May include half-days (NUMERIC).,NUMERIC,False,False,True
+ecommerce_db,acme_corp,training_courses,category,"Category: compliance, engineering, leadership, sales, analytics.",STRING,False,False,True
+ecommerce_db,acme_corp,training_courses,course_id,Unique course identifier (format: CRS###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,training_courses,created_at,Row insert timestamp.,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,training_courses,duration_hours,Expected course duration in hours.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,training_courses,is_mandatory,TRUE if required of all employees (e.g. compliance training).,BOOL,False,False,True
+ecommerce_db,acme_corp,training_courses,provider,"Course provider (e.g. Internal, Neo4j Academy, DataCamp).",STRING,False,False,True
+ecommerce_db,acme_corp,training_courses,title,Course title.,STRING,False,False,False
+ecommerce_db,acme_corp,vendor_contracts,annual_spend_usd,Committed / expected annual spend in USD.,NUMERIC,False,False,True
+ecommerce_db,acme_corp,vendor_contracts,auto_renew,TRUE if the contract auto-renews absent cancellation notice.,BOOL,False,False,True
+ecommerce_db,acme_corp,vendor_contracts,contract_id,Unique contract identifier (format: VC###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,vendor_contracts,currency,ISO 4217 currency code of the contract.,STRING,False,False,True
+ecommerce_db,acme_corp,vendor_contracts,end_date,Contract end date.,DATE,False,False,True
+ecommerce_db,acme_corp,vendor_contracts,owner_employee_id,FK to employees.employee_id. Internal contract owner.,STRING,False,True,True
+ecommerce_db,acme_corp,vendor_contracts,signed_at,When the contract was fully executed.,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,vendor_contracts,start_date,Contract start date.,DATE,False,False,True
+ecommerce_db,acme_corp,vendor_contracts,status,"Contract status: active, expired, terminated.",STRING,False,False,True
+ecommerce_db,acme_corp,vendor_contracts,vendor_id,FK to vendors.vendor_id.,STRING,False,True,False
+ecommerce_db,acme_corp,vendors,category,"Category: saas, hardware, consulting, facilities.",STRING,False,False,True
+ecommerce_db,acme_corp,vendors,contact_email,Primary vendor contact email.,STRING,False,False,True
+ecommerce_db,acme_corp,vendors,contact_phone,Primary vendor contact phone (E.164).,STRING,False,False,True
+ecommerce_db,acme_corp,vendors,country,ISO 3166-1 alpha-2 country of registration.,STRING,False,False,True
+ecommerce_db,acme_corp,vendors,name,Vendor legal name.,STRING,False,False,True
+ecommerce_db,acme_corp,vendors,onboarded_date,Date vendor was approved and onboarded.,DATE,False,False,True
+ecommerce_db,acme_corp,vendors,risk_rating,"Security risk rating: low, medium, high. High-risk vendors get annual re-review.",STRING,False,False,True
+ecommerce_db,acme_corp,vendors,status,"Status: active, inactive, pending_review.",STRING,False,False,True
+ecommerce_db,acme_corp,vendors,vendor_id,Unique vendor identifier (format: VEN###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,web_events,country,ISO 3166-1 alpha-2 country derived from IP.,STRING,False,False,True
+ecommerce_db,acme_corp,web_events,customer_id,FK to customers.customer_id. Populated post-identification (e.g. logged-in user).,STRING,False,True,True
+ecommerce_db,acme_corp,web_events,device_type,"Device type: desktop, mobile, tablet.",STRING,False,False,True
+ecommerce_db,acme_corp,web_events,event_at,When the event fired. Partition key (by DATE).,TIMESTAMP,False,False,True
+ecommerce_db,acme_corp,web_events,event_id,Unique event identifier (format: EV###). Primary key.,STRING,True,False,False
+ecommerce_db,acme_corp,web_events,event_type,"Event type: page_view, click, form_submit, signup.",STRING,False,False,True
+ecommerce_db,acme_corp,web_events,page_url,Full URL where the event occurred.,STRING,False,False,True
+ecommerce_db,acme_corp,web_events,referrer,"HTTP referrer URL, if any.",STRING,False,False,True
+ecommerce_db,acme_corp,web_events,session_id,Session identifier grouping events from one browsing session.,STRING,False,False,True
+ecommerce_db,acme_corp,web_events,utm_campaign,UTM campaign parameter. Often matches campaigns.campaign_id but not enforced.,STRING,False,False,True
+ecommerce_db,acme_corp,web_events,utm_medium,UTM medium parameter.,STRING,False,False,True
+ecommerce_db,acme_corp,web_events,utm_source,UTM source parameter.,STRING,False,False,True
+ecommerce_db,acme_corp,web_events,visitor_id,Persistent anonymous visitor identifier (cookie-based).,STRING,False,False,True

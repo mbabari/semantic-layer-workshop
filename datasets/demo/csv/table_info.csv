@@ -1,0 +1,34 @@
+database_name,schema_name,table_name,description
+ecommerce_db,acme_corp,campaigns,Marketing campaigns across channels. Budget vs spend tracks overrun. Links to leads via leads.campaign_id.
+ecommerce_db,acme_corp,compensation,"Compensation change history. One row per comp event (new hire, merit, promotion, adjustment). Partitioned by effective_date, clustered by employee_id. Highly sensitive — restricted access."
+ecommerce_db,acme_corp,customer_addresses,"Addresses for customer accounts. Multiple addresses per customer (billing, shipping, HQ)."
+ecommerce_db,acme_corp,customer_contacts,People at customer accounts. Multiple contacts per customer. is_primary identifies the main point of contact; is_decision_maker flags economic buyers.
+ecommerce_db,acme_corp,customers,"B2B customer accounts. One row per company (logo). Clustered by segment, status. Source of truth for account ownership and LTV."
+ecommerce_db,acme_corp,departments,Organizational departments. Self-referencing via parent_department_id to form the department tree. Cost centers map to finance GL codes.
+ecommerce_db,acme_corp,employee_role_history,"SCD-style time-series of employee role changes. One row per role held. end_date IS NULL for the current role. Used for tenure, promotion velocity, and reorg analysis."
+ecommerce_db,acme_corp,employee_training,Junction table tracking employee enrollments in training courses.
+ecommerce_db,acme_corp,employees,"All ACME employees, past and present. Contains current role snapshot; see employee_role_history for time-series role changes. Clustered by department_id, employment_status."
+ecommerce_db,acme_corp,invoices,"Invoices issued to customers. Partitioned by issue_date, clustered by status. Linked to subscription or order (or both)."
+ecommerce_db,acme_corp,job_titles,Canonical job titles with level and salary band. Employees reference this table to avoid free-text title drift.
+ecommerce_db,acme_corp,leads,"Top-of-funnel leads prior to qualification. Partitioned by DATE(created_at), clustered by status. Converts to customers via converted_customer_id."
+ecommerce_db,acme_corp,offices,Physical ACME offices worldwide. One row per office location. Source of truth for employee work locations and regional capacity planning.
+ecommerce_db,acme_corp,opportunities,"Sales opportunities (deals). Partitioned by close_date, clustered by stage. Core pipeline and forecast table."
+ecommerce_db,acme_corp,order_items,Line items on orders. Multiple rows per order.
+ecommerce_db,acme_corp,orders,"One-time orders (non-subscription). Partitioned by order_date, clustered by status. Includes services and perpetual licenses."
+ecommerce_db,acme_corp,payments,"Payment transactions against invoices. Partitioned by DATE(paid_at), clustered by status. May include refunds (status = refunded)."
+ecommerce_db,acme_corp,performance_reviews,Half-yearly performance reviews. One row per employee per review period.
+ecommerce_db,acme_corp,product_categories,Product category tree. Self-referencing via parent_category_id.
+ecommerce_db,acme_corp,products,"Sellable products and services. Includes software (on-prem + SaaS), services, and training. Cost is internal unit cost for margin analysis."
+ecommerce_db,acme_corp,project_assignments,Employee allocations to projects. Multiple rows per employee / project possible over time.
+ecommerce_db,acme_corp,projects,Internal projects (cross-functional initiatives). Budget/spend tracks overrun. project_lead_id is the accountable DRI.
+ecommerce_db,acme_corp,quotes,Price quotes generated against opportunities. Version increments on each revision; the highest-version accepted row represents the final deal.
+ecommerce_db,acme_corp,sales_activities,"Logged sales activities: calls, emails, meetings, demos. Partitioned by DATE(activity_at). Can link to opportunity, lead, or contact."
+ecommerce_db,acme_corp,subscriptions,"SaaS subscriptions (recurring revenue). Partitioned by start_date, clustered by status. Source of truth for MRR/ARR."
+ecommerce_db,acme_corp,support_tickets,"Customer support tickets. Partitioned by DATE(created_at), clustered by status, priority. SLA timestamps: first_response_at, resolved_at."
+ecommerce_db,acme_corp,teams,Teams within departments. A department typically has multiple teams. Used for squad-level reporting and Slack routing.
+ecommerce_db,acme_corp,ticket_comments,Chronological comments on support tickets. Partitioned by DATE(created_at). Includes internal-only notes (is_internal=TRUE).
+ecommerce_db,acme_corp,time_off_requests,Employee time-off requests. Partitioned by start_date.
+ecommerce_db,acme_corp,training_courses,"Catalog of training courses available to employees, internal or external."
+ecommerce_db,acme_corp,vendor_contracts,Contracts with vendors. Tracks annual spend and auto-renewal for procurement / FP&A.
+ecommerce_db,acme_corp,vendors,Third-party vendors / suppliers. Risk rating drives security review cadence.
+ecommerce_db,acme_corp,web_events,"Web analytics events from acme.example. Partitioned by DATE(event_at), clustered by event_type, utm_source. High-volume; prefer partition-pruned queries."

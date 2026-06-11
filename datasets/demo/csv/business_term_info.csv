@@ -1,0 +1,77 @@
+glossary_name,category_name,term_name,description
+acme_corp_glossary,revenue_and_billing,Annual Recurring Revenue (ARR),The annualised value of all active subscription contracts. The primary top-line SaaS metric at Acme. Calculated as MRR × 12. Excludes one-time order revenue.
+acme_corp_glossary,revenue_and_billing,Monthly Recurring Revenue (MRR),The monthly normalised value of an active subscription. Source of truth is subscriptions.mrr_usd. Summed across active subscriptions to derive total company MRR.
+acme_corp_glossary,revenue_and_billing,Subscription,"A recurring-revenue contract between Acme and a customer for a specific product and plan. The subscriptions table is the source of truth for all MRR/ARR figures. A subscription has a billing cycle (monthly or annual), a seat count, and a status (active, cancelled, past_due, trialing)."
+acme_corp_glossary,revenue_and_billing,Churn,"A subscription that has been cancelled, resulting in a reduction of ARR. Identified by subscriptions.status = 'cancelled' and a non-null subscriptions.cancelled_date."
+acme_corp_glossary,revenue_and_billing,Renewal Date,The date on which a subscription is next due for renewal. Used by CSMs to prioritise at-risk accounts and by finance for ARR forecasting.
+acme_corp_glossary,revenue_and_billing,Billing Cycle,The cadence at which a subscription is billed — either monthly or annual. Annual billing typically carries a discount and improves cash collection.
+acme_corp_glossary,revenue_and_billing,Order,"A one-time, non-recurring purchase — typically professional services, training, or a perpetual license. Distinct from a subscription. Revenue is recognised at delivery rather than ratably."
+acme_corp_glossary,revenue_and_billing,Order Revenue,"The total USD value of delivered or completed one-time orders in a period. Derived from orders.total_usd where status not in ('cancelled', 'returned')."
+acme_corp_glossary,revenue_and_billing,Invoice,"A formal billing document issued to a customer against an order or subscription. Tracks amount due, due date, and payment status. An invoice can be linked to a subscription, an order, or both."
+acme_corp_glossary,revenue_and_billing,Outstanding Invoice,An invoice that has been sent to the customer but not yet paid. Identified by invoices.status = 'sent' or 'overdue'. Key indicator of cash collection risk.
+acme_corp_glossary,revenue_and_billing,Payment,"A cash receipt applied against an invoice. Tracks payment method, amount, and processing status."
+acme_corp_glossary,revenue_and_billing,Seats,The number of user licences purchased under a subscription. Used for seat-based pricing and expansion tracking.
+acme_corp_glossary,revenue_and_billing,Plan,"The named tier or package of a subscription (e.g. Enterprise Tier 3, Cloud Growth). Determines feature entitlements and pricing."
+acme_corp_glossary,sales_and_pipeline,Opportunity,"A qualified sales deal being pursued with a customer or prospect. The core pipeline and forecast record. Each opportunity has a stage, expected value, probability, and expected close date."
+acme_corp_glossary,sales_and_pipeline,Pipeline Stage,The current position of a deal in the sales process: discovery → proposal → negotiation → closed_won / closed_lost.
+acme_corp_glossary,sales_and_pipeline,Deal Amount,"The expected total contract value of an opportunity in USD, as assessed by the account executive."
+acme_corp_glossary,sales_and_pipeline,Win Probability,The estimated likelihood (0.0–1.0) that an open opportunity will close as won. Multiplied by deal amount to produce weighted pipeline.
+acme_corp_glossary,sales_and_pipeline,Weighted Pipeline,A risk-adjusted view of open pipeline calculated as opportunity amount × win probability. Used for revenue forecasting.
+acme_corp_glossary,sales_and_pipeline,Closed Won,An opportunity that has been successfully closed as a new booking. Identified by opportunities.stage = 'closed_won'.
+acme_corp_glossary,sales_and_pipeline,Bookings,"The total value of new contracts signed in a period. Derived from closed_won opportunities. Distinct from revenue, which is recognised over the subscription term."
+acme_corp_glossary,sales_and_pipeline,Loss Reason,Free-text explanation of why a deal was lost. Populated only on closed_lost opportunities. Used for competitive and win/loss analysis.
+acme_corp_glossary,sales_and_pipeline,Quote,A formal price proposal generated against an opportunity. Quotes are versioned; the highest-version accepted quote represents the final agreed deal terms.
+acme_corp_glossary,sales_and_pipeline,Discount,The percentage reduction applied from list price on a quote. Tracked per quote for margin and pricing governance analysis.
+acme_corp_glossary,sales_and_pipeline,Sales Activity,"A logged touchpoint in the sales process — call, email, meeting, or demo. Linked to an opportunity, lead, or contact. Used to measure rep engagement and pipeline velocity."
+acme_corp_glossary,sales_and_pipeline,Account Executive (AE),The Acme sales representative who owns a deal or customer account. Referenced as owner_employee_id on opportunities and account_owner_id on customers.
+acme_corp_glossary,sales_and_pipeline,Close Date,The expected or actual date a deal closes. Used as the partition key on the opportunities table and is the basis for quarterly pipeline reporting.
+acme_corp_glossary,customer_and_account,Customer,"A B2B company that has purchased or is being sold to. The customers table is the source of truth for account ownership, segmentation, and lifetime value. One row per company."
+acme_corp_glossary,customer_and_account,Customer Segment,"The sales tier a customer belongs to: enterprise, mid_market, or smb. Drives coverage model, pricing, and support SLAs."
+acme_corp_glossary,customer_and_account,Lifetime Value (LTV),The cumulative revenue collected from a customer from first contract to date. Stored as customers.lifetime_value_usd.
+acme_corp_glossary,customer_and_account,Customer Acquisition Date,The date a customer signed their first contract with Acme. Stored as customers.acquired_date. Used for cohort analysis and tenure calculations.
+acme_corp_glossary,customer_and_account,Health Score,A 0–100 composite score computed by the Customer Success model to indicate account risk. Low scores flag at-risk renewals.
+acme_corp_glossary,customer_and_account,Account Status,"The current lifecycle state of a customer account: active, churned, or prospect."
+acme_corp_glossary,customer_and_account,Customer Contact,An individual person at a customer account. A customer may have many contacts. is_primary identifies the main point of contact; is_decision_maker flags economic buyers.
+acme_corp_glossary,customer_and_account,Decision Maker,A customer contact who holds economic buying authority. Identified by customer_contacts.is_decision_maker = TRUE.
+acme_corp_glossary,customer_and_account,Customer Success Manager (CSM),The Acme employee responsible for post-sale customer health and renewals. Referenced as owner_employee_id on subscriptions.
+acme_corp_glossary,marketing_and_demand_generation,Lead,"A top-of-funnel prospect that has not yet been qualified into an opportunity. Captured with source, score, and status. Converts to a customer via converted_customer_id."
+acme_corp_glossary,marketing_and_demand_generation,Lead Source,"The channel through which a lead was acquired: web, event, referral, outbound, ads, or social."
+acme_corp_glossary,marketing_and_demand_generation,Lead Score,A 0–100 score from the marketing automation platform indicating a lead's engagement and fit. Higher scores are prioritised for SDR outreach.
+acme_corp_glossary,marketing_and_demand_generation,Lead Conversion,The event where a qualified lead becomes a new customer account. Tracked via leads.converted_customer_id and leads.converted_at.
+acme_corp_glossary,marketing_and_demand_generation,Campaign,"A marketing initiative designed to generate leads or pipeline, run across a specific channel (email, event, paid search, etc.) with a defined budget and duration."
+acme_corp_glossary,marketing_and_demand_generation,Campaign Channel,"The medium through which a campaign reaches its audience: email, social, paid_search, event, content, or ads."
+acme_corp_glossary,marketing_and_demand_generation,Campaign Budget,The planned spend allocated to a marketing campaign. Compared against campaigns.spend_usd to track over/under-spend.
+acme_corp_glossary,marketing_and_demand_generation,Web Event,"A digital interaction captured from the Acme website, such as a page view, form fill, or content download. Linked to a customer or anonymous session."
+acme_corp_glossary,product,Product,"A sellable software product or service in Acme's catalogue, including on-premise and SaaS offerings, professional services, and training. The products table tracks list price, cost, and active/retired status."
+acme_corp_glossary,product,List Price,The standard undiscounted price for a product before any negotiated discount is applied.
+acme_corp_glossary,product,Product Cost,"The internal unit cost of delivering a product, used for gross margin calculations."
+acme_corp_glossary,product,Product Category,A grouping of related products used for reporting and catalogue organisation.
+acme_corp_glossary,product,Order Line Item,"A single product line within an order, capturing quantity and unit price. Multiple line items compose an order."
+acme_corp_glossary,customer_success_and_support,Support Ticket,"A customer-reported issue or request tracked through resolution. Classified by priority (low, normal, high, urgent) and category (billing, technical, bug, feature_request)."
+acme_corp_glossary,customer_success_and_support,First Response Time,The elapsed time between a support ticket being created and the first agent response. A key SLA metric. Derived from support_tickets.first_response_at − support_tickets.created_at.
+acme_corp_glossary,customer_success_and_support,Resolution Time,The total time from ticket creation to resolution. Derived from support_tickets.resolved_at − support_tickets.created_at.
+acme_corp_glossary,customer_success_and_support,CSAT Score,Customer Satisfaction score (1–5) collected after ticket resolution. NULL if the customer did not respond to the survey.
+acme_corp_glossary,customer_success_and_support,Ticket Priority,"The urgency level of a support ticket: low, normal, high, or urgent. Drives SLA response targets."
+acme_corp_glossary,customer_success_and_support,Ticket Comment,A message or note added to a support ticket by an agent or customer after initial creation. Tracked in ticket_comments.
+acme_corp_glossary,people_and_hr,Employee,"An individual who works at Acme, past or present. The employees table stores the current role snapshot; employee_role_history provides the time-series of all role changes."
+acme_corp_glossary,people_and_hr,Headcount,The count of active employees at a point in time. Derived by filtering employees where employment_status = 'active'.
+acme_corp_glossary,people_and_hr,Hire Date,"The date an employee started at Acme. Used for tenure calculations, onboarding cohort analysis, and anniversary reporting."
+acme_corp_glossary,people_and_hr,Tenure,"The length of time an employee has been at Acme, calculated from hire_date (or role start_date for role-specific tenure) to the current date or termination_date."
+acme_corp_glossary,people_and_hr,Department,"An organisational unit within Acme (e.g. Engineering, Sales, Customer Success). Employees and projects are grouped by department."
+acme_corp_glossary,people_and_hr,Job Title,"A canonical role title with an associated level code (IC1–IC8, M1–M5) and salary band. Prevents free-text title drift."
+acme_corp_glossary,people_and_hr,Career Level,"A standardised seniority code: IC1–IC8 for individual contributors, M1–M5 for managers. Drives salary banding and promotion eligibility."
+acme_corp_glossary,people_and_hr,Salary Band,The approved minimum and maximum base salary range for a given job title and level.
+acme_corp_glossary,people_and_hr,Compensation Event,"A point-in-time change to an employee's compensation package (new_hire, merit, promotion, or adjustment). The compensation table is a full history; the most recent row per employee represents the current package."
+acme_corp_glossary,people_and_hr,Base Salary,The annualised fixed cash component of an employee's total compensation.
+acme_corp_glossary,people_and_hr,Equity Grant,The USD value of equity awarded to an employee at grant time. Tracked per compensation event.
+acme_corp_glossary,people_and_hr,Performance Review,"A half-yearly formal assessment of an employee's performance, resulting in a categorical rating (exceeds, meets, below) and a numeric score (1.0–5.0)."
+acme_corp_glossary,people_and_hr,Role History,"A time-series record of every role an employee has held, including title, department, team, and manager. Used for promotion velocity, reorg, and tenure-in-role analysis."
+acme_corp_glossary,people_and_hr,Time Off Request,"An employee's request for leave (vacation, sick, parental, etc.) including approval status and date range."
+acme_corp_glossary,people_and_hr,Training Completion,"A record of an employee completing a training course, including their final score and completion status."
+acme_corp_glossary,people_and_hr,Office,A physical Acme office location worldwide. The offices table is the source of truth for employee work locations and regional headcount capacity planning.
+acme_corp_glossary,finance_and_procurement,Vendor,An external supplier of goods or services to Acme. Vendors are linked to contracts that track annual spend commitments.
+acme_corp_glossary,finance_and_procurement,Vendor Contract,"A procurement agreement with an external vendor specifying annual committed spend, term dates, and auto-renewal behaviour."
+acme_corp_glossary,finance_and_procurement,Annual Vendor Spend,The committed or expected annual spend on a vendor contract in USD. Used by FP&A for operating expense planning.
+acme_corp_glossary,operations_and_projects,Project,"An internal cross-functional initiative with a defined budget, lead, timeline, and status. The projects table tracks planned vs. actual spend for budget variance analysis."
+acme_corp_glossary,operations_and_projects,Project Budget,The approved USD budget for an internal project. Compared against projects.spend_usd to identify over-runs.
+acme_corp_glossary,operations_and_projects,Project Assignment,"An allocation of an employee to a project, specifying their role and the percentage of their time committed."

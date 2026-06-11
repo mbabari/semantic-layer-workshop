@@ -1,0 +1,2 @@
+glossary_name,name,description
+acme_corp_glossary,Acme Corp Business Glossary,"Canonical business terms for the Acme Corp semantic layer. Each term maps to one or more tables or columns in the acme_corp schema and is organised into functional categories. Use this glossary to resolve ambiguous field names, align cross-team reporting, and drive NL-to-SQL translation."

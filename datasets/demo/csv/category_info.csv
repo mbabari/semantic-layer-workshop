@@ -1,0 +1,10 @@
+glossary_name,category_name,name,description
+acme_corp_glossary,revenue_and_billing,Revenue & Billing,"Terms related to how Acme recognises, tracks, and collects revenue from customers across subscription and one-time order motions."
+acme_corp_glossary,sales_and_pipeline,Sales & Pipeline,"Terms covering the end-to-end sales process from lead qualification through deal close, including forecasting and quoting."
+acme_corp_glossary,customer_and_account,Customer & Account,"Terms describing customer accounts, contacts, segmentation, and lifecycle health."
+acme_corp_glossary,marketing_and_demand_generation,Marketing & Demand Generation,"Terms related to campaigns, lead sourcing, and top-of-funnel activity."
+acme_corp_glossary,product,Product,Terms describing Acme's sellable product and service catalogue.
+acme_corp_glossary,customer_success_and_support,Customer Success & Support,"Terms related to post-sale customer health, support tickets, and satisfaction measurement."
+acme_corp_glossary,people_and_hr,People & HR,"Terms covering employee records, org structure, compensation, performance, and workforce operations."
+acme_corp_glossary,finance_and_procurement,Finance & Procurement,"Terms related to invoicing, payments, vendor spend, and financial operations."
+acme_corp_glossary,operations_and_projects,Operations & Projects,"Terms covering internal cross-functional projects, budgets, and office facilities."

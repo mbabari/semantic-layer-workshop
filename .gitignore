@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+
+# uv
+.uv/
+
+# Jupyter
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Environment & secrets — never commit
+.env
+.env.*
+!.env.example
+
+# Local IDE / agent tooling
+.claude/
+.cursor/
+.vscode/
+
+# OS
+.DS_Store
+
+# Local notes & scratch (internal context — not for publication)
+*slack-summary*
+PUBLISHING.md
+how-to-run/
+curl-test.txt
+/tmp/
+*.stderr.log
+*.out
+*.err
+
+# Optional: keep experimental scaling scripts local unless explicitly shared
+# datasets/make_distractors.py
+# datasets/build_large_graph.py
